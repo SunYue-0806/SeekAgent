@@ -1,6 +1,7 @@
 import json
 
 from seek_agent.core.llm import LLMClient
+from seek_agent.prompt.prompt_utils import load_system_prompt
 from seek_agent.tools.tools import get_all_tools_schema, execute_tool
 
 
@@ -35,7 +36,7 @@ class ReActAgent:
         self.client = client
         self.messages = []
         self.max_steps = 5
-        self.system_prompt = "You are a helpful assistant."
+        self.system_prompt = load_system_prompt()
         self.messages = [
             {"role": "system", "content": self.system_prompt}
         ]
