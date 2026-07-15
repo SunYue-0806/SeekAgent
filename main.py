@@ -9,16 +9,26 @@ from seek_agent.tools import weather_tool
 load_dotenv()
 
 
-
 def main():
-
     llm_client = LLMClient()
-
-    question = "北京的天气今天如何？"
 
     react_agent = ReActAgent(llm_client)
 
-    react_agent.run(question)
+    while True:
+        try:
+            user_input = input("User ＞ ").strip()
+            if not user_input:
+                continue
+            if user_input.lower() in ['exit', 'quit']:
+                print("Agent ＞ 再见！")
+                break
+
+            response = react_agent.run(user_input)
+            print(f"\nAgent ＞ {response}\n" + "=" * 40)
+
+        except KeyboardInterrupt:
+            print("\nAgent ＞ 检测到强行中断，退出。")
+            break
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-
 import json
 
 from seek_agent.core.llm import LLMClient
@@ -36,14 +35,14 @@ class ReActAgent:
         self.client = client
         self.messages = []
         self.max_steps = 5
-
-    def run(self, question: str):
-        system_content = "You are a helpful assistant."
-
+        self.system_prompt = "You are a helpful assistant."
         self.messages = [
-            {"role": "system", "content": system_content},
-            {"role": "user", "content": question}
+            {"role": "system", "content": self.system_prompt}
         ]
+
+    def run(self, user_message: str):
+        self.messages.append({"role": "user", "content": user_message})
+        step_messages = list(self.messages)
         current_step = 0
 
         while current_step < self.max_steps:
@@ -52,18 +51,20 @@ class ReActAgent:
 
             tools_schema = get_all_tools_schema()
 
-            assistant_message = self.client.invoke(messages=self.messages, tools=tools_schema)
+            assistant_message = self.client.invoke(messages=step_messages, tools=tools_schema)
 
             if "tool_calls" not in assistant_message and assistant_message.get("content"):
                 parsed_calls = _parse_tool_call_from_text(assistant_message["content"])
                 if parsed_calls:
                     assistant_message["tool_calls"] = parsed_calls
 
-            self.messages.append(assistant_message)
+            step_messages.append(assistant_message)
 
             if "tool_calls" not in assistant_message:
-                print("Core Goal Achieved Successfully.")
-                return assistant_message.get("content", "")
+                final_content = assistant_message.get("content", "")
+                self.messages.append({"role": "assistant", "content": final_content})
+                print("Achieved Goal Successfully, return final content")
+                return final_content
 
             print(f"Detected {len(assistant_message['tool_calls'])} tool request(s). Executing...")
 
@@ -76,7 +77,7 @@ class ReActAgent:
 
                 print(f"全局工具执行返回: {tool_result}")
 
-                self.messages.append({
+                step_messages.append({
                     "role": "tool",
                     "tool_call_id": tool_id,
                     "name": tool_name,
