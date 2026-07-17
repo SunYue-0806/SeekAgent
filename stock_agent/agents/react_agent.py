@@ -1,9 +1,9 @@
 import json
 from typing import AsyncGenerator, Dict, Any
 
-from socket_agent.llm.openai_model_client import OpenAIModelClient
-from socket_agent.prompt.prompt_utils import load_system_prompt
-from socket_agent.tools.tools import get_all_tools_schema, execute_tool
+from stock_agent.llm.openai_model_client import OpenAIModelClient
+from stock_agent.prompt.prompt_utils import load_system_prompt
+from stock_agent.tools.tools import get_all_tools_schema, execute_tool
 
 
 def _parse_tool_call_from_text(content: str) -> list:

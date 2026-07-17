@@ -2,8 +2,8 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from socket_agent.llm.openai_model_client import OpenAIModelClient
-from socket_agent.core.message import Message
+from stock_agent.llm.openai_model_client import OpenAIModelClient
+from stock_agent.core.message import Message
 
 
 class Agent(ABC):

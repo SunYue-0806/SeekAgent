@@ -2,8 +2,8 @@
 
 from dotenv import load_dotenv
 
-from socket_agent.agents.react_agent import ReActAgent
-from socket_agent.llm.openai_model_client import OpenAIModelClient
+from stock_agent.agents.react_agent import ReActAgent
+from stock_agent.llm.openai_model_client import OpenAIModelClient
 
 load_dotenv()
 

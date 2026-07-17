@@ -1,7 +1,7 @@
 from typing import Any
 
-from socket_agent.schema.message import BaseMessage, AssistantMessage
-from socket_agent.schema.tool_call import ToolCall
+from stock_agent.schema.message import BaseMessage, AssistantMessage
+from stock_agent.schema.tool_call import ToolCall
 
 
 class BaseMessageChunk(BaseMessage):

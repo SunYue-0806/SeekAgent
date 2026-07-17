@@ -3,7 +3,7 @@ from dataclasses import Field
 from pydantic import BaseModel
 from typing import Union, List, Dict, Optional, Any
 
-from socket_agent.schema.tool_call import ToolCall
+from stock_agent.schema.tool_call import ToolCall
 
 
 class BaseMessage(BaseModel):
