@@ -3,7 +3,7 @@
 import os
 import requests
 
-from seek_agent.tools.tools import tool
+from socket_agent.tools.tools import tool
 
 XIN_ZHI_WEATHER_API_KEY = os.getenv("XIN_ZHI_WEATHER_API_KEY", "你的心知天气私钥")
 

@@ -1,31 +1,31 @@
 """异常体系"""
 
 
-class SeekAgentsException(Exception):
+class SocketAgentsException(Exception):
     """HelloAgents基础异常类"""
 
     pass
 
 
-class LLMException(SeekAgentsException):
+class LLMException(SocketAgentsException):
     """LLM相关异常"""
 
     pass
 
 
-class AgentException(SeekAgentsException):
+class AgentException(SocketAgentsException):
     """Agent相关异常"""
 
     pass
 
 
-class ConfigException(SeekAgentsException):
+class ConfigException(SocketAgentsException):
     """配置相关异常"""
 
     pass
 
 
-class ToolException(SeekAgentsException):
+class ToolException(SocketAgentsException):
     """工具相关异常"""
 
     pass
